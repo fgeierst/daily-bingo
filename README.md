@@ -4,15 +4,16 @@
 
 A bingo game made with Vue and Vite.
 
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar).
+https://daily-bingo.vercel.app/
 
 
 ## Project Setup
 
+Requirements are [Node](https://nodejs.dev/en/download/) and [pnpm](https://pnpm.io/installation#on-windows).
+
 ```sh
+git clone https://github.com/fgeierst/daily-bingo.git
+cd daily-bingo
 pnpm install
 ```
 
