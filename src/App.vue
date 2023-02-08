@@ -55,7 +55,7 @@ const isBingo = computed(() => {
 
 <template>
   <header>
-    <div class="logo">Daily Bingo</div>
+    <h1 class="logo">Daily Bingo</h1>
   </header>
 
   <main>
