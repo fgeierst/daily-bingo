@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "pocketbase": "^0.10.1",
     "vue": "^3.2.45"
   },
   "devDependencies": {

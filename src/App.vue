@@ -1,5 +1,17 @@
 <script setup>
 import { ref, computed } from 'vue'
+import WordlistSelect from './components/WordlistSelect.vue'
+
+
+// you can also fetch all records at once via getFullList
+// const records = await pb.collection('wordlists').getFullList(200 /* batch size */, {
+//     sort: '-created',
+// });
+
+// or fetch only the first record that matches the specified filter
+// const record = await pb.collection('wordlists').getFirstListItem('someField="test"', {
+//     expand: 'relField1,relField2.subRelField',
+// });
 
 const wordlist = ['Many meetings', 'Weather', 'You are muted', 'Who is next?', 'Kids sick', 'TYPO3 Update']
 
@@ -59,6 +71,9 @@ const isBingo = computed(() => {
   </header>
 
   <main>
+    <Suspense>
+      <WordlistSelect />
+    </Suspense>
     <table>
       <tbody>
         <tr v-for="row in table" :key="row">
