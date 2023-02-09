@@ -1,0 +1,84 @@
+<script setup>
+import { ref, onUnmounted } from 'vue';
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase('https://still-sky-6595.fly.dev');
+
+const name = ref('');
+const playerId = ref('');
+const isCreated = ref(false);
+const message = ref('&nbsp');
+
+async function createPlayer() {
+	const data = { 'name': name.value };
+
+	try {
+		const result = await pb.collection('players').create(data);
+		playerId.value = result.id;
+		isCreated.value = true;
+		message.value = `${name.value} (${playerId.value}) has joined the game!`
+	} catch (e) {
+		console.error(e);
+		message.value = e;
+	}
+}
+
+async function removePlayer() {
+	try {
+		await pb.collection('players').delete(playerId.value);
+		message.value = `${name.value} has left the game!`
+		playerId.value = null;
+		// name.value = '';
+		isCreated.value = false;
+	} catch (e) {
+		console.error(e);
+		message.value = e;
+	}
+}
+
+window.onbeforeunload = async function(){
+	await pb.collection('players').delete(playerId.value);
+}
+</script>
+
+<template>
+	<div class="create-player">
+
+		<form @submit.prevent="createPlayer" v-show="!isCreated">
+			<label>Name
+				<input type="text" 
+					v-model="name" 
+					:disabled="isCreated"
+				>
+			</label>
+			<button :disabled="isCreated">Join Game</button> 
+		</form>
+
+		<form @submit.prevent="removePlayer" v-show="isCreated">
+			<label>Name
+				<input type="text" v-model="name" disabled="true">
+			</label>
+			<button :disabled="!isCreated">Leave Game</button> 
+		</form>
+
+		<p class="message" v-html="message"></p>
+
+	</div>
+</template>
+
+<style>
+	.create-player {
+		margin-block-end: 2rem;
+	}
+	input, button {
+		font-size: inherit;
+		margin-inline-end: 1rem;
+	}
+	form {
+		margin-block-end: 1rem;
+	}
+
+	.message {
+		font-style: italic;
+	}
+</style>

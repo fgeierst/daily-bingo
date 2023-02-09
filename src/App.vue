@@ -1,17 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import WordlistSelect from './components/WordlistSelect.vue'
-
-
-// you can also fetch all records at once via getFullList
-// const records = await pb.collection('wordlists').getFullList(200 /* batch size */, {
-//     sort: '-created',
-// });
-
-// or fetch only the first record that matches the specified filter
-// const record = await pb.collection('wordlists').getFirstListItem('someField="test"', {
-//     expand: 'relField1,relField2.subRelField',
-// });
+import RealtimePlayers from './components/RealtimePlayers.vue'
+import CreatePlayer from './components/CreatePlayer.vue'
 
 const wordlist = ['Many meetings', 'Weather', 'You are muted', 'Who is next?', 'Kids sick', 'TYPO3 Update']
 
@@ -66,35 +57,37 @@ const isBingo = computed(() => {
 </script>
 
 <template>
-  <header>
-    <h1 class="logo">Daily Bingo</h1>
-  </header>
+  <h1 class="logo">Daily Bingo</h1>
 
-  <main>
-    <Suspense>
-      <WordlistSelect />
-    </Suspense>
-    <table>
-      <tbody>
-        <tr v-for="row in table" :key="row">
-          <td v-for="column in row" :key="column">
-            <label :class="{ checked: column.checked }">
-              {{ column.label }}
-              <input type="checkbox" v-model="column.checked">
-            </label>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <Suspense>
+    <CreatePlayer />
+  </Suspense>
 
-    <div class="result" v-if="isBingo">Bingo!</div>
-  </main>
+  <table>
+    <tbody>
+      <tr v-for="row in table" :key="row">
+        <td v-for="column in row" :key="column">
+          <label :class="{ checked: column.checked }">
+            {{ column.label }}
+            <input type="checkbox" v-model="column.checked">
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="result" v-if="isBingo">Bingo!</div>
 
 </template>
 
 <style scoped>
+h1 {
+  margin-block-end: 2rem;
+  font-size: unset;
+  font-weight: bold;
+}
 table {
-  border-spacing: 1rem;
+  border-collapse: collapse;
 }
 
 td {
