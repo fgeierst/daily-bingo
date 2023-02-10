@@ -1,8 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import WordlistSelect from './components/WordlistSelect.vue'
-import RealtimePlayers from './components/RealtimePlayers.vue'
-import CreatePlayer from './components/CreatePlayer.vue'
+import PlayersList from './components/PlayersList.vue'
+import JoinGameButton from './components/JoinGameButton.vue'
 
 const wordlist = ['Many meetings', 'Weather', 'You are muted', 'Who is next?', 'Kids sick', 'TYPO3 Update']
 
@@ -59,8 +58,10 @@ const isBingo = computed(() => {
 <template>
   <h1 class="logo">Daily Bingo</h1>
 
+  <PlayersList />
+
   <Suspense>
-    <CreatePlayer />
+    <JoinGameButton />
   </Suspense>
 
   <table>
@@ -86,6 +87,7 @@ h1 {
   font-size: unset;
   font-weight: bold;
 }
+
 table {
   border-collapse: collapse;
 }
@@ -94,6 +96,7 @@ td {
   border: 1px solid var(--color-border);
   padding: 1rem;
 }
+
 label {
   display: flex;
   gap: 1rem;
