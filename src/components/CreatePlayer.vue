@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onUnmounted } from 'vue';
+import { ref } from 'vue';
 import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('https://still-sky-6595.fly.dev');
@@ -17,6 +17,11 @@ async function createPlayer() {
 		playerId.value = result.id;
 		isCreated.value = true;
 		message.value = `${name.value} (${playerId.value}) has joined the game!`
+
+		// Set event listener to delete the player when user closes the window.
+		window.onbeforeunload = async function(){
+			await pb.collection('players').delete(playerId.value);
+		}
 	} catch (e) {
 		console.error(e);
 		message.value = e;
@@ -28,17 +33,17 @@ async function removePlayer() {
 		await pb.collection('players').delete(playerId.value);
 		message.value = `${name.value} has left the game!`
 		playerId.value = null;
-		// name.value = '';
 		isCreated.value = false;
+
+		// Remove the beforeunload event listener.
+		window.onbeforeunload = null;
 	} catch (e) {
 		console.error(e);
 		message.value = e;
 	}
 }
 
-window.onbeforeunload = async function(){
-	await pb.collection('players').delete(playerId.value);
-}
+
 </script>
 
 <template>
