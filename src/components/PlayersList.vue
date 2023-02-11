@@ -1,8 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import PocketBase from 'pocketbase';
-
-const pb = new PocketBase('https://still-sky-6595.fly.dev');
+import { pb } from '../lib/pocketbase.js'
 
 const players = ref([]);
 const isSubscribed = ref(false);
@@ -11,7 +9,6 @@ onMounted(async () => {
 	// Fetch all players present in the database.
 	try {
 		players.value = await pb.collection('players').getFullList(200, { sort: '-created', });
-		console.log(players.value);
 
 	} catch (e) {
 		console.log(e);

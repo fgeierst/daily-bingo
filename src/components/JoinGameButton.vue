@@ -1,8 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import PocketBase from 'pocketbase';
-
-const pb = new PocketBase('https://still-sky-6595.fly.dev');
+import { pb } from '../lib/pocketbase.js'
 
 const name = ref('');
 const playerId = ref('');
@@ -19,7 +17,7 @@ async function createPlayer() {
 		message.value = `${name.value} (${playerId.value}) has joined the game!`
 
 		// Set event listener to delete the player when user closes the window.
-		window.onbeforeunload = async function(){
+		window.onbeforeunload = async function () {
 			await pb.collection('players').delete(playerId.value);
 		}
 	} catch (e) {
@@ -40,6 +38,7 @@ async function removePlayer() {
 	} catch (e) {
 		console.error(e);
 		message.value = e;
+
 	}
 }
 
@@ -51,19 +50,16 @@ async function removePlayer() {
 
 		<form @submit.prevent="createPlayer" v-show="!isCreated">
 			<label>Name
-				<input type="text" 
-					v-model="name" 
-					:disabled="isCreated"
-				>
+				<input type="text" v-model="name" :disabled="isCreated">
 			</label>
-			<button :disabled="isCreated">Join Game</button> 
+			<button :disabled="isCreated">Join Game</button>
 		</form>
 
 		<form @submit.prevent="removePlayer" v-show="isCreated">
 			<label>Name
 				<input type="text" v-model="name" disabled="true">
 			</label>
-			<button :disabled="!isCreated">Leave Game</button> 
+			<button :disabled="!isCreated">Leave Game</button>
 		</form>
 
 		<p class="message" v-html="message"></p>
@@ -72,18 +68,21 @@ async function removePlayer() {
 </template>
 
 <style>
-	.create-player {
-		margin-block-end: 2rem;
-	}
-	input, button {
-		font-size: inherit;
-		margin-inline-end: 1rem;
-	}
-	form {
-		margin-block-end: 1rem;
-	}
+.create-player {
+	margin-block-end: 2rem;
+}
 
-	.message {
-		font-style: italic;
-	}
+input,
+button {
+	font-size: inherit;
+	margin-inline-end: 1rem;
+}
+
+form {
+	margin-block-end: 1rem;
+}
+
+.message {
+	font-style: italic;
+}
 </style>
