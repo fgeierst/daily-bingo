@@ -58,9 +58,10 @@ function leaveGame() {
 				<input type="text" v-model="name" disabled="true">
 			</label>
 			<button :disabled="!isCreated">Leave Game</button>
+			<span class="message" v-html="message"></span>
 		</form>
 
-		<p class="message" v-html="message"></p>
+
 
 	</div>
 </template>
@@ -68,6 +69,7 @@ function leaveGame() {
 <style>
 .create-player {
 	margin-block-end: 2rem;
+	line-height: 1.7;
 }
 
 input,
