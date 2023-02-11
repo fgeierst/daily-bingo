@@ -31,16 +31,11 @@ function makeTable(colums, rows) {
 const table = ref(makeTable(3, 3));
 
 const isBingo = computed(() => {
-  // first row is checked
-  // table.value[0].every(cell => cell.checked);
 
-  // some row is checked
+  // Some row is checked.
   const isRowChecked = table.value.some(row => row.every(cell => cell.checked));
 
-  // first column is checked
-  // table.value.every(row => row[0].checked);
-
-  // some column is checked
+  // Some column is checked.
   let isColumnChecked = false;
   for (let i = 0; i < table.value.length; i++) {
     if (table.value.every(row => row[i].checked)) {
@@ -60,9 +55,7 @@ const isBingo = computed(() => {
 
   <PlayersList />
 
-  <Suspense>
-    <JoinGameButton />
-  </Suspense>
+  <JoinGameButton />
 
   <table>
     <tbody>

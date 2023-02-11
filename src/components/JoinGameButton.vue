@@ -7,11 +7,10 @@ const playerId = ref('');
 const isCreated = ref(false);
 const message = ref('&nbsp');
 
-async function createPlayer() {
+function createPlayer() {
 	const data = { 'name': name.value };
 
-	try {
-		const result = await pb.collection('players').create(data);
+	pb.collection('players').create(data).then((result) => {
 		playerId.value = result.id;
 		isCreated.value = true;
 		message.value = `${name.value} (${playerId.value}) has joined the game!`
@@ -20,26 +19,23 @@ async function createPlayer() {
 		window.onbeforeunload = async function () {
 			await pb.collection('players').delete(playerId.value);
 		}
-	} catch (e) {
-		console.error(e);
-		message.value = e;
-	}
+	}).catch((error) => {
+		message.value = error;
+	});
 }
 
-async function removePlayer() {
-	try {
-		await pb.collection('players').delete(playerId.value);
+function removePlayer() {
+	pb.collection('players').delete(playerId.value).then(() => {
 		message.value = `${name.value} has left the game!`
 		playerId.value = null;
 		isCreated.value = false;
 
 		// Remove the beforeunload event listener.
 		window.onbeforeunload = null;
-	} catch (e) {
-		console.error(e);
-		message.value = e;
 
-	}
+	}).catch((error) => {
+		message.value = error;
+	});
 }
 
 

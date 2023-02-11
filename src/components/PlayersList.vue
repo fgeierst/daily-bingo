@@ -22,7 +22,6 @@ function subscribeToPlayers() {
 	console.log('Subscribed to players...');
 	isSubscribed.value = true;
 	pb.collection('players').subscribe('*', function (e) {
-		console.log(e.action, e.record.name);
 		switch (e.action) {
 			case 'create':
 				players.value.push(e.record);
