@@ -29,6 +29,13 @@ function subscribePlayerEvents() {
 				players.value = players.value.filter(player => player.id !== e.record.id);
 				break;
 			case 'update':
+				players.value = players.value.map(player => {
+					if (player.id === e.record.id) {
+						return e.record;
+					} else {
+						return player;
+					}
+				})
 				console.log('Update', e.record.name);
 				break;
 		}
@@ -53,7 +60,7 @@ function unsubscribePlayerEvents() {
 	<div class="players">
 		<h2>Players: </h2>
 		<ul>
-			<li v-for="player in players" :key="player.id">
+			<li v-for="player in players" :key="player.id" :class="{ isBingo: player.isBingo }">
 				{{ player.name }}
 			</li>
 		</ul>
@@ -86,7 +93,13 @@ li:not(:last-child):after {
 	content: ', ';
 }
 
-button {
-	font-size: 70%;
+.isBingo {
+	background-color: black;
+	color: white;
+}
+
+.isBingo::after {
+	background-color: white;
+	color: black;
 }
 </style>

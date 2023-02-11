@@ -1,11 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { makeTable } from '../lib/makeTable'
-
-const table = ref(makeTable(3, 3));
+import { computed } from 'vue';
+import { table } from '../lib/makeTable.js';
 
 const isBingo = computed(() => {
-
 	// Some row is checked.
 	const isRowChecked = table.value.some(row => row.every(cell => cell.checked));
 
@@ -17,8 +14,9 @@ const isBingo = computed(() => {
 		}
 	}
 
-	return isColumnChecked || isRowChecked;
-})
+	return isRowChecked || isColumnChecked;
+});
+
 
 </script>
 

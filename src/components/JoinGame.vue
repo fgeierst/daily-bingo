@@ -40,7 +40,6 @@ function leaveGame() {
 	});
 }
 
-
 </script>
 
 <template>
