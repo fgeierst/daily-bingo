@@ -13,13 +13,12 @@ onMounted(async () => {
 	} catch (e) {
 		console.log(e);
 	}
-	subscribeToPlayers();
+	subscribePlayerEvents();
 })
 
 
-// Subscribe to server sent data events of the 'players' collection.
-function subscribeToPlayers() {
-	console.log('Subscribed to players...');
+// Subscribe to server-sent events of the 'players' collection.
+function subscribePlayerEvents() {
 	isSubscribed.value = true;
 	pb.collection('players').subscribe('*', function (e) {
 		switch (e.action) {
@@ -33,14 +32,18 @@ function subscribeToPlayers() {
 				console.log('Update', e.record.name);
 				break;
 		}
+	}).then(() => {
+		// Add callback to unsubscribe when window is closed.
+		window.addEventListener('beforeunload', unsubscribePlayerEvents);
+
+	}).catch((error) => {
+		console.log(error);
 	});
 }
 
-// Unsubscribe.
-function unsubscribe() {
+// Unsubscribe from server-sent events.
+function unsubscribePlayerEvents() {
 	pb.collection('players').unsubscribe();
-	isSubscribed.value = false;
-	console.log('...Unsubscribed.');
 }
 
 
@@ -54,8 +57,6 @@ function unsubscribe() {
 				{{ player.name }}
 			</li>
 		</ul>
-		<button @click="subscribeToPlayers" v-show="!isSubscribed">Subscribe</button>
-		<button @click="unsubscribe" v-show="isSubscribed">Unsubscribe</button>
 	</div>
 </template>
 

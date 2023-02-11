@@ -7,32 +7,34 @@ const playerId = ref('');
 const isCreated = ref(false);
 const message = ref('&nbsp');
 
-function createPlayer() {
+function deletePlayerFromDatabase() {
+	pb.collection('players').delete(playerId.value);
+}
+
+function joinGame() {
 	const data = { 'name': name.value };
 
 	pb.collection('players').create(data).then((result) => {
 		playerId.value = result.id;
 		isCreated.value = true;
-		message.value = `${name.value} (${playerId.value}) has joined the game!`
+		// message.value = `${name.value} (${playerId.value}) has joined the game!`
 
-		// Set event listener to delete the player when user closes the window.
-		window.onbeforeunload = async function () {
-			await pb.collection('players').delete(playerId.value);
-		}
+		// Add callback to delete player when window is closed.
+		window.addEventListener('beforeunload', deletePlayerFromDatabase);
+
 	}).catch((error) => {
 		message.value = error;
 	});
 }
 
-function removePlayer() {
+function leaveGame() {
+	// Remove beforeunload event listener.
+	window.removeEventListener('beforeunload', deletePlayerFromDatabase);
+
 	pb.collection('players').delete(playerId.value).then(() => {
-		message.value = `${name.value} has left the game!`
+		// message.value = `${name.value} has left the game!`
 		playerId.value = null;
 		isCreated.value = false;
-
-		// Remove the beforeunload event listener.
-		window.onbeforeunload = null;
-
 	}).catch((error) => {
 		message.value = error;
 	});
@@ -44,14 +46,14 @@ function removePlayer() {
 <template>
 	<div class="create-player">
 
-		<form @submit.prevent="createPlayer" v-show="!isCreated">
+		<form @submit.prevent="joinGame" v-show="!isCreated">
 			<label>Name
 				<input type="text" v-model="name" :disabled="isCreated">
 			</label>
 			<button :disabled="isCreated">Join Game</button>
 		</form>
 
-		<form @submit.prevent="removePlayer" v-show="isCreated">
+		<form @submit.prevent="leaveGame" v-show="isCreated">
 			<label>Name
 				<input type="text" v-model="name" disabled="true">
 			</label>

@@ -1,6 +1,6 @@
 <script setup>
 import PlayersList from './components/PlayersList.vue'
-import JoinGameButton from './components/JoinGameButton.vue'
+import JoinGame from './components/JoinGame.vue'
 import GameBoard from './components/GameBoard.vue'
 
 </script>
@@ -10,7 +10,7 @@ import GameBoard from './components/GameBoard.vue'
 
   <PlayersList />
 
-  <JoinGameButton />
+  <JoinGame />
 
   <GameBoard />
 
