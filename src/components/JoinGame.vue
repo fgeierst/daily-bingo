@@ -44,9 +44,10 @@ function leaveGame() {
 
 		<form @submit.prevent="joinGame" v-show="!isCreated">
 			<label>Name
-				<input type="text" v-model="player.name" :disabled="isCreated">
+				<input type="text" v-model="player.name" :disabled="isCreated" minlength="3" maxlength="20">
 			</label>
 			<button :disabled="isCreated">Join Game</button>
+			<span class="message" v-html="message"></span>
 		</form>
 
 		<form @submit.prevent="leaveGame" v-show="isCreated">
@@ -56,8 +57,6 @@ function leaveGame() {
 			<button :disabled="!isCreated">Leave Game</button>
 			<span class="message" v-html="message"></span>
 		</form>
-
-
 
 	</div>
 </template>
