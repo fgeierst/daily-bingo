@@ -1,23 +1,21 @@
 <script setup>
 import { ref } from 'vue';
 import { pb } from '../lib/pocketbase.js'
+import { player } from '../lib/store.js'
 
-const name = ref('');
-const playerId = ref('');
 const isCreated = ref(false);
 const message = ref('&nbsp');
 
 function deletePlayerFromDatabase() {
-	pb.collection('players').delete(playerId.value);
+	pb.collection('players').delete(player.id);
 }
 
 function joinGame() {
-	const data = { 'name': name.value };
+	const data = { 'name': player.name };
 
 	pb.collection('players').create(data).then((result) => {
-		playerId.value = result.id;
+		player.id = result.id;
 		isCreated.value = true;
-		// message.value = `${name.value} (${playerId.value}) has joined the game!`
 
 		// Add callback to delete player when window is closed.
 		window.addEventListener('beforeunload', deletePlayerFromDatabase);
@@ -31,9 +29,8 @@ function leaveGame() {
 	// Remove beforeunload event listener.
 	window.removeEventListener('beforeunload', deletePlayerFromDatabase);
 
-	pb.collection('players').delete(playerId.value).then(() => {
-		// message.value = `${name.value} has left the game!`
-		playerId.value = null;
+	pb.collection('players').delete(player.id).then(() => {
+		player.id = null;
 		isCreated.value = false;
 	}).catch((error) => {
 		message.value = error;
@@ -47,14 +44,14 @@ function leaveGame() {
 
 		<form @submit.prevent="joinGame" v-show="!isCreated">
 			<label>Name
-				<input type="text" v-model="name" :disabled="isCreated">
+				<input type="text" v-model="player.name" :disabled="isCreated">
 			</label>
 			<button :disabled="isCreated">Join Game</button>
 		</form>
 
 		<form @submit.prevent="leaveGame" v-show="isCreated">
 			<label>Name
-				<input type="text" v-model="name" disabled="true">
+				<input type="text" v-model="player.name" disabled="true">
 			</label>
 			<button :disabled="!isCreated">Leave Game</button>
 			<span class="message" v-html="message"></span>

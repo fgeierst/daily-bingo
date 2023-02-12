@@ -1,7 +1,10 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
+import { pb } from '../lib/pocketbase.js'
 import { table } from '../lib/makeTable.js';
+import { player } from '../lib/store.js'
 
+// Evaluate if the game is won.
 const isBingo = computed(() => {
 	// Some row is checked.
 	const isRowChecked = table.value.some(row => row.every(cell => cell.checked));
@@ -13,10 +16,23 @@ const isBingo = computed(() => {
 			isColumnChecked = true;
 		}
 	}
-
-	return isRowChecked || isColumnChecked;
+	const result = isRowChecked || isColumnChecked;
+	return result;
 });
 
+// Push isBingo state to database.
+watch(isBingo, (newValue) => {
+	if (player.id) {
+		const data = {
+			"name": player.name,
+			"isBingo": newValue
+		};
+
+		pb.collection('players').update(player.id, data).catch((error) => {
+			console.log(error);
+		});
+	}
+});
 
 </script>
 

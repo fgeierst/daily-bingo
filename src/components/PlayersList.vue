@@ -9,7 +9,6 @@ onMounted(async () => {
 	// Fetch all players present in the database.
 	try {
 		players.value = await pb.collection('players').getFullList(200, { sort: 'created', });
-
 	} catch (e) {
 		console.log(e);
 	}
@@ -36,7 +35,6 @@ function subscribePlayerEvents() {
 						return player;
 					}
 				})
-				console.log('Update', e.record.name);
 				break;
 		}
 	}).then(() => {
