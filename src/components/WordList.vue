@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { pb } from '../lib/pocketbase.js'
+import { ref, computed } from 'vue';
+import { pb } from '../lib/pocketbase.js';
 
 const { items } = await pb.collection('wordlists').getList();
 

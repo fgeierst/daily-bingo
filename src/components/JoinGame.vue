@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import { pb } from '../lib/pocketbase.js'
-import { player } from '../lib/store.js'
+import { pb } from '../lib/pocketbase.js';
+import { player } from '../lib/store.js';
 
 const isCreated = ref(false);
 const message = ref('&nbsp');

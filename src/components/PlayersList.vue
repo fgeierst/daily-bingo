@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { pb } from '../lib/pocketbase.js'
+import { pb } from '../lib/pocketbase.js';
 
 const players = ref([]);
 const isSubscribed = ref(false);
@@ -13,7 +13,7 @@ onMounted(async () => {
 		console.log(e);
 	}
 	subscribePlayerEvents();
-})
+});
 
 
 // Subscribe to server-sent events of the 'players' collection.
@@ -34,7 +34,7 @@ function subscribePlayerEvents() {
 					} else {
 						return player;
 					}
-				})
+				});
 				break;
 		}
 	}).then(() => {
