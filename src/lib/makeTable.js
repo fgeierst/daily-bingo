@@ -1,4 +1,4 @@
-const wordlist = ['Many meetings', 'Weather', 'You are muted', 'Who is next?', 'Kids sick', 'TYPO3 Update'];
+const wordlist = ['Many meetings', 'Weather', 'You are muted', 'Who is next?', 'Kids sick', 'TYPO3 Update', 'spooning aggressivly'];
 
 function randomWord() {
 	return wordlist[Math.floor(Math.random() * wordlist.length)];
