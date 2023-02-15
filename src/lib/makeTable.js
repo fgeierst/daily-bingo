@@ -1,7 +1,9 @@
-const wordlist = ['Many meetings', 'Weather', 'You are muted', 'Who is next?', 'Kids sick', 'TYPO3 Update', 'spooning aggressivly', 'Sorry I am late', 'Parkinglot free?', 'Who is in the office?', 'lukas joins daily', 'cat appearance', 'story about background'];
+const wordlist = ['Many meetings', 'Weather', 'You are muted', 'Who is next?', 'Kids sick', 'TYPO3 Update', 'Spooning aggressivly', 'Sorry I am late', 'Parkinglot free?', 'Who is in the office?', 'Lukas joins daily', 'Cat appearance', 'Story about background'];
 
 function randomWord() {
-	return wordlist[Math.floor(Math.random() * wordlist.length)];
+	const randomIndex = Math.floor(Math.random() * wordlist.length);
+	const [word] = wordlist.splice(randomIndex, 1);
+	return word;
 }
 
 function makeRow(colums) {
