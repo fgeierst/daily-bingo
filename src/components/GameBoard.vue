@@ -6,6 +6,10 @@ import { player } from '../lib/store.js';
 
 // Push isBingo state to database.
 watch(player, (newValue) => {
+	if (newValue.isBingo === true) {
+		audioElement.play();
+	}
+	
 	if (player.id) {
 		const data = {
 			"name": player.name,
@@ -17,6 +21,8 @@ watch(player, (newValue) => {
 		});
 	}
 });
+
+const audioElement = new Audio("bing.mp3");
 
 </script>
 
