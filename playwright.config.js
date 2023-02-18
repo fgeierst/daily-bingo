@@ -1,5 +1,5 @@
 // @ts-check
-const { devices } = require('@playwright/test')
+import { devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -107,6 +107,6 @@ const config = {
     port: 5173,
     reuseExistingServer: !process.env.CI
   }
-}
+};
 
-module.exports = config
+module.exports = config;

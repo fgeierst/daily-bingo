@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vueuse/motion": "2.0.0-beta.12",
+    "pocketbase": "^0.10.1",
     "vue": "^3.2.45"
   },
   "devDependencies": {

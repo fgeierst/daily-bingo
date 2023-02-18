@@ -8,12 +8,14 @@ specifiers:
   eslint: ^8.22.0
   eslint-plugin-vue: ^9.3.0
   jsdom: ^20.0.3
+  pocketbase: ^0.10.1
   vite: ^4.0.0
   vitest: ^0.25.6
   vue: ^3.2.45
 
 dependencies:
   '@vueuse/motion': 2.0.0-beta.12_vue@3.2.47
+  pocketbase: 0.10.1
   vue: 3.2.47
 
 devDependencies:
@@ -1455,6 +1457,9 @@ packages:
       hey-listen: 1.0.8
       style-value-types: 5.1.2
       tslib: 2.4.0
+      
+  /pocketbase/0.10.1:
+    resolution: {integrity: sha512-FMBhF+9o2AmdKJYbfz2qunnk4Q5/efYMRcukdQF49UfhsIuaSYl39fSPN1l880bYI4XAvDDeySAjK1MlxrK37A==}
     dev: false
 
   /postcss-selector-parser/6.0.11:
