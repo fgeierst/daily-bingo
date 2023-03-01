@@ -58,10 +58,10 @@ function unsubscribePlayerEvents() {
 	<div class="players">
 		<h2>Players: </h2>
 		<ul>
-			<li v-for="player in players" :key="player.id" :class="{ isBingo: player.isBingo }"
-					v-motion
-						:initial="{ opacity: 0, y: 100, }" 
-						:enter="{ opacity: 1, y: 0, }"
+			<li v-for="player in players" 
+				:key="player.id" 
+				:class="{ isBingo: player.isBingo }"
+				v-motion-roll-visible-bottom
 			>
 				{{ player.name }}
 			</li>
@@ -88,7 +88,7 @@ ul {
 }
 
 li {
-	display: inline;
+	display: inline-block;
 }
 
 li:not(:last-child):after {
