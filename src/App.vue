@@ -21,6 +21,7 @@ import GameBoard from './components/GameBoard.vue';
 
 <style scoped>
 .title {
+  margin-block-start: 3rem;
   margin-block-end: 2rem;
   font-size: unset;
   font-weight: bold;
