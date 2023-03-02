@@ -46,20 +46,23 @@ const audioElement = new Audio("bing.mp3");
 <style scoped>
 table {
 	border-collapse: collapse;
+	margin-inline: auto;
 }
 
 td {
 	border: 1px solid var(--color-border);
-	padding: 1rem;
+	padding: var(--gap-sm);
 }
 
 label {
 	display: flex;
 	gap: 1rem;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 	text-align: center;
 	line-height: 1;
+	aspect-ratio: 1/1;
+  max-height: 8rem;
 }
 
 label.checked {

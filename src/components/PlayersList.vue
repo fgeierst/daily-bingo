@@ -77,6 +77,7 @@ h2 {
 
 .players {
 	margin-block-end: 2rem;
+	text-align: center;
 }
 
 ul {

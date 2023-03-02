@@ -65,13 +65,13 @@ function leaveGame() {
 .create-player {
 	margin-block-end: 2rem;
 	line-height: 1.7;
+	text-align: center;
 }
 
-input,
-button {
-	font-size: inherit;
+input {
 	margin-inline-end: 1rem;
 }
+
 
 form {
 	margin-block-end: 1rem;
