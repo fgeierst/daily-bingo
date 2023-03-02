@@ -16,12 +16,15 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@iconify-json/noto": "^1.1.11",
     "@playwright/test": "^1.28.1",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/compiler-sfc": "^3.2.47",
     "@vue/test-utils": "^2.2.6",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "jsdom": "^20.0.3",
+    "unplugin-icons": "^0.15.3",
     "vite": "^4.0.0",
     "vitest": "^0.25.6"
   }

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { pb } from '../lib/pocketbase.js';
+import { animals } from '../lib/animals.js';
 
 const players = ref([]);
 const isSubscribed = ref(false);
@@ -56,45 +57,66 @@ function unsubscribePlayerEvents() {
 
 <template>
 	<div class="players">
-		<h2>Players: </h2>
+		<h2 class="visually-hidden">Players</h2> 
+		
 		<ul>
 			<li v-for="player in players" 
 				:key="player.id" 
 				:class="{ isBingo: player.isBingo }"
-				v-motion-roll-visible-bottom
 			>
-				{{ player.name }}
+				<div class="avatar">
+					<component :is="animals[player.animal]" class="animal"/>
+					<p class="name">{{ Array.from(player.name)[0]  }}</p>
+				</div>
+				
 			</li>
 		</ul>
 	</div>
 </template>
 
 <style scoped>
-h2 {
-	font-size: inherit;
-	display: inline;
+.avatar {
+	display: grid;
+	align-items: center;
+  justify-items: center;
 }
+
+.animal {
+	width: 3.5em;
+	height: 3.5em;
+	grid-area: 1 / 1;
+}
+
+.avatar::before {
+	grid-area: 1 / 1;
+	box-sizing: border-box;
+	content: '';
+	border: 2px solid black;
+	border-radius: 50%;
+	width: 2.7em;
+	height: 2.7em;
+}
+
+.name {
+	line-height: .7;
+	text-transform: uppercase;
+}
+
 
 .players {
 	margin-block-end: 2rem;
-	text-align: center;
 }
 
 ul {
-	display: inline;
+	display: flex;
+	justify-content: center;
+  flex-wrap: wrap;
 	list-style: none;
 	gap: .5rem;
 	padding-inline-start: 0;
 	margin-inline-end: 1rem;
 }
 
-li {
-	display: inline-block;
-}
-
-li:not(:last-child):after {
-	content: ', ';
-}
 
 .isBingo {
 	background-color: black;

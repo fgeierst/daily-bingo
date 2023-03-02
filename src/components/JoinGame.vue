@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { pb } from '../lib/pocketbase.js';
 import { player } from '../lib/store.js';
+import { animals, getRandomAnimal } from '../lib/animals.js';
 
 const isCreated = ref(false);
 const message = ref('&nbsp');
@@ -11,7 +12,13 @@ function deletePlayerFromDatabase() {
 }
 
 function joinGame() {
-	const data = { 'name': player.name };
+	player.animal = getRandomAnimal();
+	console.log("random animal: ", player.animal);
+	
+	const data = {
+		'name': player.name,
+		'animal': player.animal,
+	};
 
 	pb.collection('players').create(data).then((result) => {
 		player.id = result.id;

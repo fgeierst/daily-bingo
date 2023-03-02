@@ -7,5 +7,6 @@ export const player = reactive({
 	id: '',
 	table: makeTable(3, 3),
 	isBingo: computed(isBingo),
+	animal: '',
 });
 
