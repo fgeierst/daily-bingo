@@ -2,18 +2,21 @@
 import { ref } from 'vue';
 import { pb } from '../lib/pocketbase.js';
 import { player } from '../lib/store.js';
-import { animals, getRandomAnimal } from '../lib/animals.js';
+import { getRandomAnimal } from '../lib/animals.js';
 
 const isCreated = ref(false);
-const message = ref('&nbsp');
 
 function deletePlayerFromDatabase() {
 	pb.collection('players').delete(player.id);
 }
 
 function joinGame() {
+	if (player.name < 3) {
+		player.message = 'Please enter a name of at least 3 characters.';
+		return;
+	}
+
 	player.animal = getRandomAnimal();
-	console.log("random animal: ", player.animal);
 	
 	const data = {
 		'name': player.name,
@@ -28,7 +31,7 @@ function joinGame() {
 		window.addEventListener('beforeunload', deletePlayerFromDatabase);
 
 	}).catch((error) => {
-		message.value = error;
+		player.message = error;
 	});
 }
 
@@ -40,7 +43,7 @@ function leaveGame() {
 		player.id = null;
 		isCreated.value = false;
 	}).catch((error) => {
-		message.value = error;
+		player.message = error;
 	});
 }
 
@@ -54,7 +57,6 @@ function leaveGame() {
 				<input type="text" v-model="player.name" :disabled="isCreated" minlength="3" maxlength="20">
 			</label>
 			<button :disabled="isCreated">Join Game</button>
-			<span class="message" v-html="message"></span>
 		</form>
 
 		<form @submit.prevent="leaveGame" v-show="isCreated">
@@ -62,7 +64,6 @@ function leaveGame() {
 				<input type="text" v-model="player.name" disabled="true">
 			</label>
 			<button :disabled="!isCreated">Leave Game</button>
-			<span class="message" v-html="message"></span>
 		</form>
 
 	</div>
@@ -82,9 +83,5 @@ input {
 
 form {
 	margin-block-end: 1rem;
-}
-
-.message {
-	font-style: italic;
 }
 </style>

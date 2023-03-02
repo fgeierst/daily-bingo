@@ -40,13 +40,16 @@ const audioElement = new Audio("bing.mp3");
 		</tbody>
 	</table>
 
-	<div class="result" v-if="player.isBingo">Bingo!</div>
+	<p class="result" v-if="player.isBingo">Bingo!</p>
+	<p class="message" v-html="player.message"></p>
+
 </template>
 
 <style scoped>
 table {
 	border-collapse: collapse;
 	margin-inline: auto;
+	margin-block-end: var(--gap);
 }
 
 td {
@@ -72,5 +75,10 @@ label.checked {
 
 input {
 	display: none;
+}
+
+.message {
+	color: var(--c-grey);
+	text-align: center;
 }
 </style>
