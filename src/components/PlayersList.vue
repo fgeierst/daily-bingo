@@ -2,14 +2,15 @@
 import { ref, onMounted } from 'vue';
 import { pb } from '../lib/pocketbase.js';
 import { animals } from '../lib/animals.js';
+import { players } from '../lib/store.js';
 
-const players = ref([]);
 const isSubscribed = ref(false);
 
 onMounted(async () => {
 	// Fetch all players present in the database.
-	try {
+	try {		
 		players.value = await pb.collection('players').getFullList(200, { sort: 'created', });
+		
 	} catch (e) {
 		console.log(e);
 	}

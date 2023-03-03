@@ -7,7 +7,7 @@ import horse from '~icons/noto/horse';
 import mouse from '~icons/noto/mouse';
 import rabbit from '~icons/noto/rabbit';
 import ram from '~icons/noto/ram';
-import panda from '~icons/noto/panda';
+import pig from '~icons/noto/pig';
 import monkey from '~icons/noto/monkey';
 
 export const animals = {
@@ -20,7 +20,7 @@ export const animals = {
 	mouse: mouse,
 	rabbit: rabbit,
 	ram: ram,
-	panda: panda,
+	pig: pig,
 	monkey: monkey,
 };
 

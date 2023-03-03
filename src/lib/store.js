@@ -1,4 +1,4 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 import { makeTable } from './makeTable.js';
 import { isBingo } from './isBingo.js';
 
@@ -11,3 +11,4 @@ export const player = reactive({
 	message: '',
 });
 
+export const players = ref([]);
