@@ -30,7 +30,7 @@ body {
   background: var(--color-background);
   font-family: 'Comic Sans', system-ui;
   font-size: clamp(1rem, 0.375rem + 2vw, 1.5rem);  
-  margin: 1rem;
+  margin: .5rem;
 }
 
 button, input {

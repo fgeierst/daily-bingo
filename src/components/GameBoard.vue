@@ -46,6 +46,7 @@ const audioElement = new Audio("bing.mp3");
 </template>
 
 <style scoped>
+
 table {
 	border-collapse: collapse;
 	margin-inline: auto;
@@ -53,8 +54,19 @@ table {
 }
 
 td {
-	border: 1px solid var(--color-border);
-	padding: var(--gap-sm);
+	border: 0;
+	padding: var(--gap);
+}
+
+table::before {
+	content:'';
+	height: 100%;
+  width: 100%;
+	top: 0;
+  position: absolute;
+	background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 97 97"%3E%3Cpath stroke="%23000" stroke-linecap="round" stroke-width=".6" d="M33 .6s-2.3 33.6-2.5 57.6c-.2 24 1.7 38.4 1.7 38.4M67 .6s-2.3 33.6-2.5 57.6c-.2 24 1.7 38.4 1.7 38.4"/%3E%3Cpath stroke="%23000" stroke-linecap="round" stroke-width=".6" d="M96.4 36s-33.6-2.3-57.6-2.5C14.8 33.3.4 35.2.4 35.2m96 33.8s-33.6-2.3-57.6-2.5C14.8 66.3.4 68.2.4 68.2"/%3E%3C/svg%3E');
+	background-repeat: no-repeat;
+  background-size: contain;
 }
 
 label {
