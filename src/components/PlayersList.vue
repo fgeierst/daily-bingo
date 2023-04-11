@@ -2,14 +2,15 @@
 import { ref, onMounted } from 'vue';
 import { pb } from '../lib/pocketbase.js';
 import { animals } from '../lib/animals.js';
+import { players } from '../lib/store.js';
 
-const players = ref([]);
 const isSubscribed = ref(false);
 
 onMounted(async () => {
 	// Fetch all players present in the database.
-	try {
+	try {		
 		players.value = await pb.collection('players').getFullList(200, { sort: 'created', });
+		
 	} catch (e) {
 		console.log(e);
 	}
@@ -63,6 +64,21 @@ function unsubscribePlayerEvents() {
 			<li v-for="player in players" 
 				:key="player.id" 
 				:class="{ isBingo: player.isBingo }"
+				v-motion
+					:initial="{
+						scale: 0,
+						opacity: 0,
+					}"
+					:enter="{
+						scale: 1,
+						opacity: 1,
+						transition: {
+							type: 'spring',
+							stiffness: 300,
+							damping: 5,
+							mass: .8,
+						},
+					}"
 			>
 				<div class="avatar">
 					<component :is="animals[player.animal]" class="animal"/>

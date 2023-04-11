@@ -22,7 +22,7 @@ watch(player, (newValue) => {
 	}
 });
 
-const audioElement = new Audio("bing.mp3");
+const audioElement = new Audio("bingo.mp3");
 
 </script>
 

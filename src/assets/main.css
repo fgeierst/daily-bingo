@@ -21,14 +21,14 @@
   box-sizing: border-box;
   margin: 0;
   position: relative;
-  font-weight: normal;
 }
 
 body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  font-family: 'Comic Sans', system-ui;
+  font-family: 'Shantell Sans', system-ui;
+  font-variation-settings: "ital" 0.2, "wght" 688, "INFM" 77, "BNCE" 21.9, "SPAC" 10;
   font-size: clamp(1rem, 0.375rem + 2vw, 1.5rem);  
   margin: .5rem;
 }
@@ -36,6 +36,8 @@ body {
 button, input {
   font-family: inherit;
   font-size: inherit;
+  font-weight: inherit;
+  font-variation-settings: inherit;
 }
 
 .visually-hidden {
