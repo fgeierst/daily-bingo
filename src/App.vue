@@ -2,6 +2,7 @@
 import PlayersList from './components/PlayersList.vue';
 import JoinGame from './components/JoinGame.vue';
 import GameBoard from './components/GameBoard.vue';
+import AiParrot from './components/AiParrot.vue';
 
 </script>
 
@@ -16,6 +17,8 @@ import GameBoard from './components/GameBoard.vue';
   <JoinGame />
 
   <GameBoard />
+
+  <AiParrot />
 
 </template>
 

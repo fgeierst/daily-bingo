@@ -2,6 +2,7 @@
   "name": "daily-bingo",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,20 +13,20 @@
   },
   "dependencies": {
     "@vueuse/motion": "2.0.0-beta.12",
-    "pocketbase": "^0.10.1",
-    "vue": "^3.2.45"
+    "pocketbase": "^0.14.4",
+    "vue": "^3.3.2"
   },
   "devDependencies": {
     "@iconify-json/noto": "^1.1.11",
-    "@playwright/test": "^1.28.1",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vue/compiler-sfc": "^3.2.47",
-    "@vue/test-utils": "^2.2.6",
-    "eslint": "^8.22.0",
-    "eslint-plugin-vue": "^9.3.0",
-    "jsdom": "^20.0.3",
-    "unplugin-icons": "^0.15.3",
-    "vite": "^4.0.0",
-    "vitest": "^0.25.6"
+    "@playwright/test": "^1.33.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/compiler-sfc": "^3.3.2",
+    "@vue/test-utils": "^2.3.2",
+    "eslint": "^8.40.0",
+    "eslint-plugin-vue": "^9.12.0",
+    "jsdom": "^22.0.0",
+    "unplugin-icons": "^0.16.1",
+    "vite": "^4.3.5",
+    "vitest": "^0.31.0"
   }
 }
