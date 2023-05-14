@@ -4,21 +4,26 @@ import { pb } from '../lib/pocketbase.js';
 import { player } from '../lib/store.js';
 
 
-// Push isBingo state to database.
+// Watch for player changes
 watch(player, (newValue) => {
 	if (newValue.isBingo === true) {
 		audioElement.play();
 	}
-	
+
 	if (player.id) {
 		const data = {
 			"name": player.name,
 			"isBingo": newValue.isBingo,
 		};
 
-		pb.collection('players').update(player.id, data).catch((error) => {
-			console.log(error);
-		});
+		// Update player changes to database
+		pb.collection('players').update(player.id, data).catch((error) => { console.log(error); });
+
+		// Trigger ai chat message generation
+		const query = `${player.animal}: ${player.count}, ${newValue.isBingo ? "BINGO" : ""}`;
+		const encodedQuery = encodeURIComponent(query);
+		const url = `/api/chat?query=${encodedQuery}`;
+		fetch(url).catch(error => console.error(error));
 	}
 });
 
@@ -42,11 +47,9 @@ const audioElement = new Audio("bingo.mp3");
 
 	<p class="result" v-if="player.isBingo">Bingo!</p>
 	<p class="message" v-html="player.message"></p>
-
 </template>
 
 <style scoped>
-
 table {
 	border-collapse: collapse;
 	margin-inline: auto;
@@ -59,14 +62,14 @@ td {
 }
 
 table::before {
-	content:'';
+	content: '';
 	height: 100%;
-  width: 100%;
+	width: 100%;
 	top: 0;
-  position: absolute;
+	position: absolute;
 	background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 97 97"%3E%3Cpath stroke="%23000" stroke-linecap="round" stroke-width=".6" d="M33 .6s-2.3 33.6-2.5 57.6c-.2 24 1.7 38.4 1.7 38.4M67 .6s-2.3 33.6-2.5 57.6c-.2 24 1.7 38.4 1.7 38.4"/%3E%3Cpath stroke="%23000" stroke-linecap="round" stroke-width=".6" d="M96.4 36s-33.6-2.3-57.6-2.5C14.8 33.3.4 35.2.4 35.2m96 33.8s-33.6-2.3-57.6-2.5C14.8 66.3.4 68.2.4 68.2"/%3E%3C/svg%3E');
 	background-repeat: no-repeat;
-  background-size: contain;
+	background-size: contain;
 }
 
 label {
@@ -77,7 +80,7 @@ label {
 	text-align: center;
 	line-height: 1;
 	aspect-ratio: 1/1;
-  max-height: 8rem;
+	max-height: 8rem;
 }
 
 label.checked {

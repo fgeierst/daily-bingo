@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@vueuse/motion": "2.0.0-beta.12",
+    "openai": "^3.2.1",
     "pocketbase": "^0.14.4",
     "vue": "^3.3.2"
   },

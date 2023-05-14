@@ -15,3 +15,17 @@ export function isBingo() {
 	const result = isRowChecked || isColumnChecked;
 	return result;
 }
+
+export function countCheckedItems() {
+  let count = 0;
+
+  for (let i = 0; i < player.table.length; i++) {
+    for (let j = 0; j < player.table[i].length; j++) {
+      if (player.table[i][j].checked) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}

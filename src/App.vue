@@ -7,22 +7,30 @@ import AiParrot from './components/AiParrot.vue';
 </script>
 
 <template>
-  <h1 class="title">
-    Daily
-    <span class="title__big">Bingo!</span>
-  </h1>
 
-  <PlayersList />
+  <main>
+    <h1 class="title">
+      Daily
+      <span class="title__big">Bingo!</span>
+    </h1>
 
-  <JoinGame />
+    <PlayersList />
+    <JoinGame />
+    <GameBoard />
+  </main>
 
-  <GameBoard />
-
-  <AiParrot />
+  <aside class="parrot">
+    <AiParrot />
+  </aside>
 
 </template>
 
 <style scoped>
+.parrot {
+  position: fixed;
+  bottom: 0;
+  right: .5rem;
+}
 .title {
   margin-block-start: 3rem;
   margin-block-end: 2rem;
