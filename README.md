@@ -1,8 +1,8 @@
-# daily-bingo
+# Daily Bingo!
 
-![Screenshot](screenshot.jpg)
+![Screenshot](daily-bingo-screenshot.jpeg)
 
-A bingo game made with Vue and Vite.
+A bingo game made with Vue, Vite and a realtime [Pocketbase](https://github.com/pocketbase/pocketbase) database.
 
 https://daily-bingo.vercel.app/
 
